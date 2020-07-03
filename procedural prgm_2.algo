@@ -1,0 +1,57 @@
+
+// autre methode pour resoudre le problem checkpoints
+
+FUNCTION dot_product(): ARRAY_OF STRING
+VAR
+    p:INTEGER:=0;
+    ps : FLOAT:=0;
+    n,j,i,k:INTEGER; 
+    T: ARRAY_OF FLOAT[n][3];
+    Tstr: ARRAY_OF STRING;
+
+BEGIN
+
+    Write("give the number of vectors");
+    Read(n);
+
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        FOR j FROM 0 TO 2 STEP 1  DO
+            Write("write vectors"+ (i+1) +"composant"+ (j+1));
+            Read(T[i][j]);
+        END_FOR
+    END_FOR
+
+    FOR i FROM 0 TO n-2 STEP 1  DO
+        FOR j FROM j:=i+1 TO n-1 STEP 1  DO
+
+            FOR k FROM 0 TO 2 STEP 1  DO
+                ps:= ps + T[i][k]*T[j][k]
+            END_FOR
+
+            WHILE ( ps = 0 ) DO
+                Tstr[p]:= "The vectors V"+(i+1)+"is orthogonal to vectors V"+(j+1);
+            END_WHILE
+
+            ps:=0;
+
+        END_FOR   
+    END_FOR
+    RETURN Tstr ;
+END
+
+
+ALGORITHM dot
+VAR
+    i : INTEGER;
+    TT : ARRAY_OF STRING;
+BEGIN
+    TT:= dot_product();
+    IF (TT.length=0) THEN
+        Write("All vectors is not orthogonal ");
+    ELSE
+        FOR i FROM 0 TO TT.length STEP 1  DO
+            Write(TT[i]);
+        END_FOR
+    END_IF 
+
+END
