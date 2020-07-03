@@ -1,0 +1,47 @@
+PROCEDURE dot_product(v1,v2 : ARRAY_OF FLOAT[3]):FLOAT;
+VAR
+    ps : FLOAT:=0;
+    i : INTEGER;
+BEGIN
+    FOR i FROM 1 TO v1.lenght STEP 1  DO
+        ps:= ps + v1[i]*v2[i]
+    END_FOR
+    RETURN ps ;
+END
+
+
+
+
+ALGORITHM dot
+VAR 
+    p:INTEGER:=0;
+    n,f,j,i:INTEGER;  
+    T: array_name : ARRAY_OF FLOAT[n][3];
+
+
+BEGIN
+    Write("give the number of vectors");
+    Read(n);
+
+    FOR i FROM 0 TO n-1 STEP 1  DO
+        FOR j FROM 0 TO 2 STEP 1  DO
+            Write("write vectors"+ (i+1) +"composant"+ (j+1));
+            Read(T[i][j]);
+        END_FOR
+    END_FOR
+    
+    FOR i FROM 0 TO n-2 STEP 1  DO
+        FOR j FROM j:=i+1 TO n-1 STEP 1  DO
+                f:=dot_product({T[i][0],T[i][1],T[i][2]},{T[j][0],T[j][1],T[j][2]});
+            WHILE (f = 0 ) DO
+                Write("The vectors V"+(i+1)+"is orthogonal to vectors V"+(j+1));
+                p:=p+1;
+            END_WHILE
+        END_FOR   
+    END_FOR
+    IF (p=0) THEN
+        Write("All vectors is not orthogonal ");
+    END_IF
+
+END
+
